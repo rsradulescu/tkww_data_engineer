@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: tkww_postgres
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: "{{ env_var('DBT_USER') }}"
+      POSTGRES_PASSWORD: "{{ env_var('DBT_USER') }}"
+      POSTGRES_DB: tkww_product
+
+volumes:
+  pgdata:
