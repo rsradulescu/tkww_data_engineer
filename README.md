@@ -59,7 +59,7 @@ For this query I started creating a view with all the possible dates on users an
 <img src="images/sql_7_acquisition_revenue_date.png" alt="aquisition revenue date query" width="80%">
 
 
-**You can find the complete soluiton in the [file here](/sql/sql_questions.sql).**
+**You can find the complete solution in the [file here](/sql/sql_questions.sql).**
 
 ---
 
@@ -85,17 +85,18 @@ Bue seems the main idea is:
 1) Load data: Load users data and transactions data in a dataframe. The source data is in a CSV file on CSV folder.
 
 2) Make some transformations: 
-* * Set email column on users df to lower. 
-* * Timestamp column is converted to datetime. 
-* * Rename the amount column to transaction_amount.
-* * Complete the missing emails (null value) to a default email.
+    * Set email column on users df to lower. 
+    * Timestamp column is converted to datetime. 
+    * Rename the amount column to transaction_amount.
+    * Complete the missing emails (null value) to a default email.
 
 3)  Merge both df: Join transaction and user dataframes using a left join (all transactions rows) on the user_id column.
 Share the result in a new df.
 
 4) Print the result df.
 
-* **What changes would you suggest to improve it to apply SW development best practices?**
+
+**What changes would you suggest to improve it to apply SW development best practices?**
 
 There are many suggestions we can apply to follow best practices in software development. I'll mention a few:
 * Share comments: This allows you to create more readable and understandable code.
@@ -112,12 +113,13 @@ There are many suggestions we can apply to follow best practices in software dev
 ## EXTRA 
 ### Project setup
 
-This project use a docker compose with two services: Python and postgres (for the database, and SQL questions).
+This project use a docker compose with two services: Python and PostgreSQL (for the database, and SQL questions).
 
 **How to run it?**
 
-1) Start the service using docker_compose file. This include start PostgreSQL and Python services, and install Python libraries from requirements.txt, 
-    $docker compose -f docker/docker-compose.yml up -d
+1) Start the service using docker_compose file. This include start PostgreSQL and Python services, and install Python libraries from requirements.txt
+
+    $ docker compose -f docker/docker-compose.yml up -d
 
 3) Run the proposed Python script with the solution: This will run my proposed solution using two CSV files with fake data to load the data frame.
 
