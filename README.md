@@ -3,10 +3,13 @@
 
 This challenge include two basic lines: SQL and Python.
 
+---
+
 ## 1) SQL Questions 
 
 To solve the challenge I decided to use PostgreSQL (version 17) as a relational db, on a docker compose. 
 Use the table_definition.sql to create and populate the tables on docker postgres.
+
     $ docker exec -i tkww_postgres psql -U postgres -d tkww_product < sql/table_definition.sql
 
 <img src="images/sql_create_populate.png" alt="Populate tables" width="80%">
@@ -16,40 +19,49 @@ After create the two required tables on a public schema (the raw data), I start 
 * **Acquisition by date?**
 
 The query shows the acquisition date and the count per day, in descending order. In this case, I created a view with the query because I'll reuse it later.
+
 <img src="images/sql_1_aquisition_date.png" alt="aquisition date query" width="80%">
 
 * **Revenue by country?**
 
 The query shows the payment revenue and sum per country, with 2 digit, ordered by revenue. I created a view with the query because I'll reuse it later.
+
 <img src="images/sql_2_revenue_country.png" alt="reveue country query" width="80%">
 
 * **Acquisition and revenue by country?**
 
 The query use the view with the query from point 2, and users table. Show the revenue and aquisition per country.
+
 <img src="images/sql_3_revenue_country_aquisition.png" alt="reveue country aquisition query" width="80%">
 
 * **Countries without any revenue?**
 
 View country created (based on distinct countries from Users table). Get all the countries not in revenue_by_country.
+
 <img src="images/sql_4_revenue_without_country.png" alt="reveue country aquisition query" width="80%">
 
 * **Country with the highest revenue?**
 
 Get the MAX revenue, and show the country name that match. Return: one record only.
+
 <img src="images/sql_5_highest_revenue.png" alt="highest revenue query" width="80%">
 
 * **Share of revenue by country?**
 
 Revenue_share: percentage of revenue that came from countries. To solve it I get first the total revenue, and the revenue by country.
+
 <img src="images/sql_6_share_revenue.png" alt="share revenue query" width="80%">
 
 * **Acquisition and revenue by date?**
 
 For this query I started creating a view with all the possible dates on users and payments tables. From here I compare this dates with the view acquisition_by_date and with CTE payments_by_date. Use COALESCE in the caswe the result is null.
+
 <img src="images/sql_7_acquisition_revenue_date.png" alt="aquisition revenue date query" width="80%">
 
 
 **You can find the complete soluiton in the [file here](/sql/sql_questions.sql).**
+
+---
 
 ## 2) Python Questions 
 
@@ -64,6 +76,7 @@ Most recently, I’ve also developed two applications using Flask and Python. On
 * **Describe what the following code is doing.**
 
 To start, this code doesn't work, has some issues. For example, the pandas library definition is missing, also some quotes.
+
 <img src="images/python_1_issue.png" alt="python source file" width="80%">
 
 
@@ -91,8 +104,10 @@ There are many suggestions we can apply to follow best practices in software dev
 * Define a main function: It's a good idea to have a handler function that work as an entry point to your application. This is where you can call other functions and print the results.
 
 **You can find the proposed solution in [this script](/python/python_solution.py).**
+
 <img src="images/python_2_solution.png" alt="python solution" width="80%">
 
+--- 
 
 ## EXTRA 
 ### Project setup
@@ -105,13 +120,17 @@ This project use a docker compose with two services: Python and postgres (for th
     $docker compose -f docker/docker-compose.yml up -d
 
 3) Run the proposed Python script with the solution: This will run my proposed solution using two CSV files with fake data to load the data frame.
+
     $ docker exec -it tkww_python bash
-    # python python/python_solution.py
+    $ python python/python_solution.py
+
+--- 
 
 **NOTE**: Credentials saving
 To protect your credentials and prevent them from being exposed to internet, you can use env variables. You should define them in the terminal and then use them instead of hardcoded credentials.
-    $export DBT_USER=XXXX
-    $export DBT_PASS=XXXX  
+
+    $ export DBT_USER=XXXX
+    $ export DBT_PASS=XXXX  
 
 ---
 
