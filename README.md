@@ -9,7 +9,7 @@ To solve the challenge I decided to use PostgreSQL (version 17) as a relational 
 Use the table_definition.sql to create and populate the tables on docker postgres.
     $ docker exec -i tkww_postgres psql -U postgres -d tkww_product < sql/table_definition.sql
 
-![Alt text](images/sql_create_populate.png)
+<img src="images/sql_create_populate.png" alt="Populate tables" width="70%">
 
 After create the two required tables on a public schema (the raw data), I start to create the queries:
 
